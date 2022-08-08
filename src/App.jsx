@@ -89,11 +89,9 @@ function App() {
 						/>
 					</form>
 					<div
-						className={`relative ${
-							!regionFilterDiplay && "hide-oveflow"
-						} transition ease-in-out md:w-full`}>
+						className={`relative  transition ease-in-out md:w-full`}>
 						<div
-							className={`min-w-[200px] h-[50px] rounded-md items-center px-6 flex item-center justify-between text-[14px] text-[#616161] bg-white mb-1 shadow-sm cursor-default ${
+							className={`min-w-[200px] h-[50px] transition ease-in-out rounded-md items-center px-6 flex item-center justify-between text-[14px] text-[#616161] bg-white mb-1 shadow-sm cursor-default ${
 								display && "dark-mode-element"
 							}`}>
 							<span className='font-semibold'>Filter by Region</span>
@@ -101,38 +99,38 @@ function App() {
 								loading='lazy'
 								src={rightIcon}
 								alt={`downdrop`}
-								className={`h-[14px] cursor-pointer ${
+								className={`h-[14px] cursor-pointer hover:scale-150 ${
 									regionFilterDiplay && "rotate-90"
 								} transition-transform ease-in-out ${display && "fill-white"}`}
 								onClick={() => setRegionFilterDiplay((prev) => !prev)}
 							/>
 						</div>
 						<div
-							className={`w-full absolute bg-white grid z-20 left-0 top-[60px] text-[#676768] drop-shadow-md rounded-md p-1 ${
+							className={`w-full absolute bg-white grid z-20 transition ease-in-out left-0 top-[60px] text-[#676768] drop-shadow-md rounded-md p-1 ${
 								display && "dark-mode-element"
-							}`}>
+							} ${!regionFilterDiplay && "hide-filter"}`}>
 							<span
-								className='font-semibold cursor-pointer hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
+								className='font-semibold cursor-pointer transition-colors ease-in-out hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
 								onClick={() => fetchFilteredCountriesByRegion("africa")}>
 								Africa
 							</span>
 							<span
-								className='font-semibold cursor-pointer hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
+								className='font-semibold cursor-pointer transition-colors ease-in-out hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
 								onClick={() => fetchFilteredCountriesByRegion("americas")}>
 								America
 							</span>
 							<span
-								className='font-semibold cursor-pointer hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
+								className='font-semibold cursor-pointer transition-colors ease-in-out hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
 								onClick={() => fetchFilteredCountriesByRegion("asia")}>
 								Asia
 							</span>
 							<span
-								className='font-semibold cursor-pointer hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
+								className='font-semibold cursor-pointer transition-colors ease-in-out hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
 								onClick={() => fetchFilteredCountriesByRegion("europe")}>
 								Europe
 							</span>
 							<span
-								className='font-semibold cursor-pointer hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
+								className='font-semibold cursor-pointer transition-colors ease-in-out hover:text-black py-[10px] px-6 hover:bg-[#d7d7d8] rounded-sm'
 								onClick={() => fetchFilteredCountriesByRegion("oceania")}>
 								Oceania
 							</span>

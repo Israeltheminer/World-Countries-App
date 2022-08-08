@@ -12,11 +12,19 @@ export const displaySlice = createSlice({
 		changeDisplay: (state) => {
 			const previousDisplay = state.display;
 			state.display = !previousDisplay;
+			if (state.display) {
+				document.cookie = "display=dark";
+			} else {
+				document.cookie = "display=light";
+			}
 		},
+		setDisplay: (state, action)=> {
+			state.display = action.payload
+		}
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { changeDisplay } = displaySlice.actions;
+export const { changeDisplay, setDisplay } = displaySlice.actions;
 
 export default displaySlice.reducer;

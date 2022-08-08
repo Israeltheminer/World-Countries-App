@@ -18,7 +18,7 @@ const CountryPage = () => {
 	return (
 		<div className={`Country-Page min-h-[100vh] ${display && "dark-mode-bg"}`}>
 			<Navbar />
-			<div className={`px-[8%] py-12 ${display && "dark-mode-bg"} sm:pt-8`}>
+			<div className={`px-[8%] py-12 sm:pt-8`}>
 				<div className='mt-6 mb-20 sm:mt-0 sm:mb-10'>
 					<Link to='/'>
 						<button
