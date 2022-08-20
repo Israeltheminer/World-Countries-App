@@ -4,7 +4,9 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import List from "../components/List";
 import LocaleString from "../components/LocaleString";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
+import { setRefetch } from "../redux/refetchSlice";
 
 const CountryPage = () => {
 	const [country, setCountry] = useState({});
@@ -15,8 +17,15 @@ const CountryPage = () => {
 			setCountry(response.data);
 		});
 	}, [countryId]);
+	const [imageLoading, setImageLoading] = useState(true);
+	const [pulsing, setPulsing] = useState(true);
+	const dispatch = useDispatch()
+	const imageLoaded = () => {
+		setImageLoading(false);
+		setTimeout(() => setPulsing(false), 600);
+	};
 	return (
-		<div className={`Country-Page min-h-[100vh] ${display && "dark-mode-bg"}`}>
+		<div className={`Country-Page min-h-[100vh] ${display && "dark-mode-bg"} overflow-x-clip`}>
 			<Navbar />
 			<div className={`px-[8%] py-12 sm:pt-8`}>
 				<div className='mt-6 mb-20 sm:mt-0 sm:mb-10'>
@@ -24,19 +33,50 @@ const CountryPage = () => {
 						<button
 							className={`py-2 pl-[70px] pr-10 font-semibold rounded-md hover:shadow-md back-button ${
 								display ? "dark-mode-element dark-back-button" : "light-back-button"
-							}`}>
+							}`}
+							onClick={() => dispatch(setRefetch(false))}>
 							Back
 						</button>
 					</Link>
 				</div>
 				<div className='flex gap-14 mb-10 flex-wrap'>
-					<img
-						loading='lazy'
-						src={country.flag}
-						alt={`${countryId}-flag`}
-						className='inline max-w-[600px] shadow-md mx-auto min-w-[280px]'
-					/>
-					<div className='py-10 mx-auto'>
+					<motion.div
+						initial={{
+							x: -1000,
+							opacity: 0,
+						}}
+						animate={{
+							x: 0,
+							opacity: 100,
+						}}
+						transition={{
+							type: "spring",
+							duration: 2,
+							when: "beforeChildren",
+						}}
+						className={`${pulsing ? "pulse" : ""} loadable`}
+						style={{ width: `${imageLoading ? "30rem" : "auto"}` }}>
+						<motion.img
+							initial={{ height: "10rem", opacity: 0 }}
+							animate={{
+								height: imageLoading ? "10rem" : "auto",
+								opacity: imageLoading ? 0 : 1,
+							}}
+							onLoad={imageLoaded}
+							loading='lazy'
+							src={country.flag}
+							alt={`${countryId}-flag`}
+							className='inline shadow-md mx-auto min-w-[280px] max-w-[500px]'
+						/>
+					</motion.div>
+					<motion.div
+						className='py-10 mx-auto'
+						initial={{ x: 1000 }}
+						animate={{ x: 0 }}
+						transition={{
+							type: "spring",
+							duration: 2,
+						}}>
 						<h1 className='text-3xl font-semibold mb-6'>{country.name}</h1>
 						<div className='flex flex-wrap items-start justify-between'>
 							<ul className='country-list mr-12'>
@@ -76,7 +116,7 @@ const CountryPage = () => {
 								</li>
 							</ul>
 						</div>
-					</div>
+					</motion.div>
 				</div>
 			</div>
 		</div>
