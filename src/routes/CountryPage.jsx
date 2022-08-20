@@ -54,7 +54,7 @@ const CountryPage = () => {
 							duration: 2,
 							when: "beforeChildren",
 						}}
-						className={`${pulsing ? "pulse" : ""} loadable`}
+						className={`${pulsing ? "pulse" : ""} loadable max-w-[500px]`}
 						style={{ width: `${imageLoading ? "30rem" : "auto"}` }}>
 						<motion.img
 							initial={{ height: "10rem", opacity: 0 }}
@@ -66,7 +66,7 @@ const CountryPage = () => {
 							loading='lazy'
 							src={country.flag}
 							alt={`${countryId}-flag`}
-							className='inline shadow-md mx-auto min-w-[280px] max-w-[500px]'
+							className='inline shadow-md mx-auto xl:max-w-[500px] lg:max-w-[400px] xs:max-w-[310px] xxs:max-w-[280px]'
 						/>
 					</motion.div>
 					<motion.div
@@ -120,7 +120,7 @@ const CountryPage = () => {
 				</div>
 			</div>
 		</div>
-	);
+	)
 };
 
 export default CountryPage;

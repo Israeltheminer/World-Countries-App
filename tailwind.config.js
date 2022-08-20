@@ -8,8 +8,9 @@ module.exports = {
 			md: { max: "900px" },
 			sm: { max: "610px" },
 			xs: { max: "425px" },
+			xxs: { max: "345px" },
 		},
 		extend: {},
 	},
 	plugins: [],
-};
+}
